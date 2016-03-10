@@ -23,6 +23,19 @@ module Serverspec # :nodoc:
         (ret.exit_status == 0 ? true : false)
       end
 
+      def has_configuration?(key, val)
+        params  = %(config:system:get #{key}')
+        ret     = run_occ_command_with(params)
+        ret_val = ret.stdout.strip
+        val = (val.nil? ? '' : val)
+        ret_val = (val.class == Fixnum ? ret_val.to_i : ret_val)
+        if val == ret_val
+          return true
+        else
+          return false
+        end
+      end
+
       def to_s
         %(ownCloud running under user "#{@user}" with installation "#{@directory}")
       end
@@ -39,3 +52,4 @@ module Serverspec # :nodoc:
     end
   end
 end
+
