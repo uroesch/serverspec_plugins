@@ -29,7 +29,7 @@ module Serverspec # :nodoc:
         ret_val = ret.stdout.strip
         val = (val.nil? ? '' : val)
         ret_val = (val.class == Fixnum ? ret_val.to_i : ret_val)
-        if val == ret_val
+        if ret_val.match(val)
           return true
         else
           return false

@@ -56,7 +56,7 @@ To make the module work one has to pass the user owncloud is running under and t
 ```ruby
 describe owncloud(:user => 'www-data', :directory => '/var/www/owncloud') do
   it { should have_configuration('dbtype').with_value('pgsql') }
-  it { should have_configuration('version').with_value('8.2.2.2') }
+  it { should have_configuration('version').with_value(/^8\.2/) }
   it { should have_enabled_app('files_pdfviewer') }
   it { should have_enabled_app('ownnote').with_version('1.05') }
   it { should have_disabled_app('user_ldap') }
@@ -68,7 +68,7 @@ yields
 ```
 ownCloud running under user "www-data" with installation "/var/www/owncloud"
   should have configuration "dbtype" with value "pgsql"
-  should have configuration "version" with value "8.2.2.2"
+  should have configuration "version" with value "(?-mix:^8\.2)"
   should have enabled app "files_pdfviewer"
   should have enabled app "ownnote" with version "1.05"
   should have disabled app "user_ldap"
